@@ -2,14 +2,23 @@
   "env": {
     "commonjs": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "browser": true
   },
   "globals": {
     "Twilio": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
-    "ecmaVersion": 13
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
-  "rules": {}
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off"
+  }
 }

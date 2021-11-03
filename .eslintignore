@@ -1,3 +1,5 @@
 /*
+!/assets-src
 !/core
 !/functions
+!webpack.config.js

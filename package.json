@@ -6,8 +6,10 @@
   "scripts": {
     "start": "twilio-run",
     "deploy": "twilio-run deploy",
-    "dev": "twilio serverless:dev",
-    "lint": "eslint ."
+    "build-assets": "webpack --config webpack.config.js --mode production",
+    "watch-assets": "webpack --config webpack.config.js --mode development -w",
+    "dev": "concurrently \"npm run watch-assets\" \"twilio serverless:dev\"",
+    "lint": "eslint . --ext .js,.jsx"
   },
   "repository": {
     "type": "git",
@@ -23,10 +25,22 @@
     "@twilio/runtime-handler": "1.2.0",
     "twilio": "^3.56"
   },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "concurrently": "^6.3.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^7",
+    "eslint-plugin-react":"^7.26.1",
+    "html-webpack-plugin": "^5.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
+  },
   "engines": {
     "node": "12"
-  },
-  "devDependencies": {
-    "eslint": "^8.1.0"
   }
 }

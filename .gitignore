@@ -105,3 +105,6 @@ dist
 
 # Twilio Serverless
 .twiliodeployinfo
+
+# app
+assets
