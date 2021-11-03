@@ -1,0 +1,18 @@
+{
+  "name": "twilio-brand-voice-survey",
+  "version": "1.0.0",
+  "description": "A brand voice survey app that uses Twilio Programable Voice API",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/assisrafael/twilio-brand-voice-survey.git"
+  },
+  "author": "Igor Rafael <igor.rafael@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/assisrafael/twilio-brand-voice-survey/issues"
+  },
+  "homepage": "https://github.com/assisrafael/twilio-brand-voice-survey#readme"
+}
