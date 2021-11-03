@@ -40,8 +40,8 @@ export function getSurveyIntroductionTwiML({
   );
 
   const gather = response.gather({
-    input: ["speech" as GatherInput],
-    speechModel: "phoneCall" as GatherSpeechModel,
+    input: ["speech"],
+    speechModel: "phone_call",
     action: SURVEY_ENDPOINT,
     hints: getRequestHints(),
   });
