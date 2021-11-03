@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 export function SurveyForm({ onSubmit }) {
+  const [hasErrorMessage, setHasErrorMessage] = useState(false);
   const [formState, setFormState] = useState({
     firstName: "",
     phoneNumber: "",
   });
 
   function handleInput({ target: { name, value } }) {
+    setHasErrorMessage(false);
     setFormState((state) => ({
       ...state,
       [name]: value,
@@ -14,6 +16,7 @@ export function SurveyForm({ onSubmit }) {
   }
 
   function onFormSubmit(e) {
+    setHasErrorMessage(false);
     e.preventDefault();
     const searchParams = new URLSearchParams(window.location.search);
     const pageToken = searchParams.get("pageToken");
@@ -27,7 +30,8 @@ export function SurveyForm({ onSubmit }) {
         onSubmit();
       } else {
         res.text().then((errorText) => {
-          console.log(errorText);
+          console.error(errorText);
+          setHasErrorMessage(true);
         });
       }
     });
@@ -35,6 +39,12 @@ export function SurveyForm({ onSubmit }) {
 
   return (
     <form onSubmit={onFormSubmit}>
+      {hasErrorMessage && (
+        <p className="alert alert-warning">
+          Unfortunately we were not able to store your contact information.
+          Please try again later or contact us by email
+        </p>
+      )}
       <div className="mb-3">
         <label htmlFor="customerFirstName" className="form-label">
           First name
