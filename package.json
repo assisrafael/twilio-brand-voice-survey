@@ -1,9 +1,12 @@
 {
   "name": "twilio-brand-voice-survey",
   "version": "1.0.0",
+  "private": true,
   "description": "A brand voice survey app that uses Twilio Programable Voice API",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "twilio-run",
+    "deploy": "twilio-run deploy",
+    "dev": "twilio serverless:dev"
   },
   "repository": {
     "type": "git",
@@ -14,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/assisrafael/twilio-brand-voice-survey/issues"
   },
-  "homepage": "https://github.com/assisrafael/twilio-brand-voice-survey#readme"
+  "homepage": "https://github.com/assisrafael/twilio-brand-voice-survey#readme",
+  "dependencies": {
+    "@twilio/runtime-handler": "1.2.0",
+    "twilio": "^3.56"
+  },
+  "engines": {
+    "node": "12"
+  }
 }
