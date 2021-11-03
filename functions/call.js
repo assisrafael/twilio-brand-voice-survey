@@ -1,8 +1,15 @@
 "use strict";
 
-const RESPONSE_OPTIONS = {
-  voice: "alice",
-};
+const {
+  createBadResponse,
+  createUnauthorizedResponse,
+  hasValidCredentials,
+} = require("../core/http");
+const {
+  isValidCustomer,
+  getSurveyIntroductionTwiML,
+} = require("../core/survey");
+
 const FROM_PHONE_NUMBER = process.env.FROM_PHONE_NUMBER;
 
 exports.handler = function (context, event, callback) {
@@ -19,7 +26,7 @@ exports.handler = function (context, event, callback) {
 function triggerSurveyCall(context, event) {
   const client = context.getTwilioClient();
 
-  if (!isValidCustomer(event.customer)) {
+  if (!event.customer || !isValidCustomer(event.customer)) {
     return Promise.reject(new Error("Invalid customer"));
   }
 
@@ -30,46 +37,4 @@ function triggerSurveyCall(context, event) {
     to: phoneNumber,
     from: FROM_PHONE_NUMBER,
   });
-}
-
-function isValidCustomer({ phoneNumber, firstName }) {
-  return (
-    phoneNumber && phoneNumber.length > 10 && firstName && firstName.length > 2
-  );
-}
-
-function getSurveyIntroductionTwiML({ firstName }) {
-  const response = new Twilio.twiml.VoiceResponse();
-
-  const welcomeMessage = `Welcome ${firstName}`;
-
-  response.say(RESPONSE_OPTIONS, welcomeMessage);
-
-  return response.toString();
-}
-
-function createBadResponse(error) {
-  const response = new Twilio.Response();
-
-  response.setStatusCode(400);
-  response.setBody(error.message);
-
-  return response;
-}
-
-function createUnauthorizedResponse() {
-  const response = new Twilio.Response();
-
-  response.setStatusCode(401);
-  response.setBody("unauthorized");
-
-  return response;
-}
-
-function hasValidCredentials(event) {
-  return (
-    process.env.PAGE_TOKEN &&
-    event.pageToken &&
-    event.pageToken === process.env.PAGE_TOKEN
-  );
 }
