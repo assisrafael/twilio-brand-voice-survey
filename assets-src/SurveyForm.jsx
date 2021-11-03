@@ -24,9 +24,7 @@ export function SurveyForm({ onSubmit }) {
       body: JSON.stringify({ customer: formState, pageToken }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(() => {
-          onSubmit();
-        });
+        onSubmit();
       } else {
         res.text().then((errorText) => {
           console.log(errorText);
