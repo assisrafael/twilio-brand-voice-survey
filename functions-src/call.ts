@@ -1,18 +1,17 @@
-"use strict";
-
-const {
+import {
   createBadResponse,
   createUnauthorizedResponse,
   hasValidCredentials,
-} = require("../core/http");
-const {
+} from "./core/http";
+
+import {
   isValidCustomer,
   getSurveyIntroductionTwiML,
-} = require("../core/survey");
+} from "./core/survey";
 
 const FROM_PHONE_NUMBER = process.env.FROM_PHONE_NUMBER;
 
-exports.handler = function (context, event, callback) {
+export function handler(context, event, callback) {
   if (!hasValidCredentials(event)) {
     return callback(null, createUnauthorizedResponse());
   }

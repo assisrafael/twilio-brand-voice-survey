@@ -1,30 +1,31 @@
-"use strict";
+import '@twilio-labs/serverless-runtime-types';
+import { GatherInput, GatherSpeechModel, SayVoice } from 'twilio/lib/twiml/VoiceResponse';
 
-const {
+import {
   getIntroductionMessage,
   getRequestMessage,
   getThankYouMessage,
   getRequestHints,
   getNegativeAnswerMessage,
   getPositiveAnswerMessage,
-} = require("./messages");
+} from "./messages";
 
 const { CALLER_NAME, TWILIO_VOICE, BRAND_NAME, COUPON_CODE, COUPON_VALUE } =
   process.env;
 
 const RESPONSE_OPTIONS = {
-  voice: TWILIO_VOICE,
+  voice: TWILIO_VOICE as SayVoice,
 };
 
 const SURVEY_ENDPOINT = "/survey-answer";
 
-exports.isValidCustomer = function isValidCustomer({ phoneNumber, firstName }) {
+export function isValidCustomer({ phoneNumber, firstName }) {
   return (
     phoneNumber && phoneNumber.length > 10 && firstName && firstName.length > 2
   );
 };
 
-exports.getSurveyIntroductionTwiML = function getSurveyIntroductionTwiML({
+export function getSurveyIntroductionTwiML({
   firstName,
 }) {
   const response = new Twilio.twiml.VoiceResponse();
@@ -39,8 +40,8 @@ exports.getSurveyIntroductionTwiML = function getSurveyIntroductionTwiML({
   );
 
   const gather = response.gather({
-    input: "speech",
-    speechModel: "phoneCall",
+    input: ["speech" as GatherInput],
+    speechModel: "phoneCall" as GatherSpeechModel,
     action: SURVEY_ENDPOINT,
     hints: getRequestHints(),
   });
@@ -55,7 +56,7 @@ exports.getSurveyIntroductionTwiML = function getSurveyIntroductionTwiML({
   return response.toString();
 };
 
-exports.getSurveyAnswerTwiML = function getSurveyAnswerTwiML(answer = "") {
+export function getSurveyAnswerTwiML(answer = "") {
   const response = new Twilio.twiml.VoiceResponse();
 
   if (answer.startsWith("no")) {

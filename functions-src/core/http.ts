@@ -1,12 +1,12 @@
-"use strict";
+import '@twilio-labs/serverless-runtime-types';
 
-exports.createBadResponse = function createBadResponse(error) {
+export function createBadResponse(error) {
   return createResponse(400, error.message);
-};
+}
 
-exports.createUnauthorizedResponse = function createUnauthorizedResponse() {
+export function createUnauthorizedResponse() {
   return createResponse(401, "unauthorized");
-};
+}
 
 function createResponse(status, message) {
   const response = new Twilio.Response();
@@ -17,10 +17,10 @@ function createResponse(status, message) {
   return response;
 }
 
-exports.hasValidCredentials = function hasValidCredentials(event) {
+export function hasValidCredentials(event) {
   return (
     process.env.PAGE_TOKEN &&
     event.pageToken &&
     event.pageToken === process.env.PAGE_TOKEN
   );
-};
+}
