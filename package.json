@@ -6,7 +6,8 @@
   "scripts": {
     "start": "twilio-run",
     "deploy": "twilio-run deploy",
-    "dev": "twilio serverless:dev"
+    "dev": "twilio serverless:dev",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   },
   "engines": {
     "node": "12"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0"
   }
 }
