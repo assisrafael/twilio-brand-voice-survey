@@ -10,14 +10,12 @@ import {
   getPositiveAnswerMessage,
 } from "./messages";
 
-const { CALLER_NAME, TWILIO_VOICE, BRAND_NAME, COUPON_CODE, COUPON_VALUE } =
+const { CALLER_NAME, TWILIO_VOICE, BRAND_NAME, COUPON_CODE, COUPON_VALUE, SURVEY_ENDPOINT } =
   process.env;
 
 const RESPONSE_OPTIONS = {
   voice: TWILIO_VOICE as SayVoice,
 };
-
-const SURVEY_ENDPOINT = "/survey-answer";
 
 export function isValidCustomer({ phoneNumber, firstName }) {
   return (
