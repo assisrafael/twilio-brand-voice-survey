@@ -35,29 +35,40 @@ export function SurveyForm({ onSubmit }) {
 
   return (
     <form onSubmit={onFormSubmit}>
-      <p>
-        <label htmlFor="customerFirstName">First name</label>
+      <div className="mb-3">
+        <label htmlFor="customerFirstName" className="form-label">
+          First name
+        </label>
         <input
           name="firstName"
           id="customerFirstName"
+          className="form-control"
           type="text"
+          minLength="2"
           required
           onChange={handleInput}
         />
-      </p>
+      </div>
 
-      <p>
-        <label htmlFor="customerPhoneNumber">Phone number</label>
+      <div className="mb-3">
+        <label htmlFor="customerPhoneNumber" className="form-label">
+          Phone number
+        </label>
         <input
           name="phoneNumber"
           id="customerPhoneNumber"
+          className="form-control"
           type="tel"
           required
           onChange={handleInput}
         />
-      </p>
+      </div>
 
-      <button type="submit">Submit</button>
+      <div className="d-grid d-md-block">
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </div>
     </form>
   );
 }
