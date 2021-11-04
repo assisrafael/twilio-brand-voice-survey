@@ -13,6 +13,6 @@ And an API that:
 
 ## Tech Stack
 
-- ReactJS for the landing page
+- ReactJS and Bootstrap (CSS) for the landing page
 - Twilio Serverless Functions for the API using nodejs
 - Client side rendering only with assets served by Twilio Serverless Functions
